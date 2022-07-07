@@ -62,7 +62,10 @@
 
 ![overall scope](https://user-images.githubusercontent.com/84615464/177702792-554f7105-ff95-4293-8ab5-858768a17999.png)
 
-This work models and exploits stock's next day performance based on 5 prior days' behavior. The second order derivative is investigated, and a concave behavior is sought, as in the upper figure. Within a small range of next day performance's absolute magnitude, the second order derivative and next day's performance exhibits a linear relationship. ~10 Stocks within the linear range with maximal performance parameters are chosen and covariance-minimized. Such portfolio undergoes a daily update.
+This work models and exploits stock's next day performance based on 5 prior days' behavior. The second order derivative is investigated, and a concave behavior is sought, as in the upper figure.
+
+
+Within a small range of next day performance's absolute magnitude, the second order derivative and next day's performance exhibits a linear relationship. ~10 Stocks within the linear range with maximal performance parameters are chosen and covariance-minimized. Such portfolio undergoes a daily update.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -81,7 +84,7 @@ Initial commit: 22/7/7
 - [ ] Portfolio switching amount analysis
 - [ ] Analyzing more features 
 - [ ] Apply machine learning technique to quantifying correlation
-- [ ] 
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
