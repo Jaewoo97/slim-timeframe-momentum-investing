@@ -75,12 +75,15 @@ This work models and exploits stock's next day performance based on 5 prior days
 
 Run 'momentumAnalysis.py' for particular market and timeframe of interest and collect raw data (~260000 data for 5 months). Analyze the correlation between stock's past behavior and next day's perfomance using a separate tool (matlab version to be updated). Based on prior analysis, set desired parameters 'slopeLowThresh', 'slopeHighThresh', 'devLowThresh', 'devHighThresh' on 'momentumInvesting.py'.
 
+## Results
+Based on stock's behavioral data mining for 5 months between 2022/1/1 ~ 2022/6/1 for KOSPI and KOSDAQ stocks, an oustanding performance has been achieved between 2022/1/1 ~ 2022/7/1 as shown below.
 
 <!-- ROADMAP -->
-## Roadmap
+## Future work
 Initial commit: 22/7/7
-- [ ] Portfolio switching amount analysis
-- [ ] Analyzing more features 
+- [ ] Analyze daily portfolio switching amount
+- [ ] Apply methodology to more timeframes and develop a market-specific mechanism
+- [ ] Analyze more features 
 - [ ] Apply machine learning technique to quantifying correlation
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -90,7 +93,7 @@ Initial commit: 22/7/7
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Any contributions you make are **greatly appreciated**.
+Any contributions and suggestions are **greatly appreciated**.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
