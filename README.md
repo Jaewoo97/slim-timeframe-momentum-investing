@@ -77,6 +77,7 @@ Run 'momentumAnalysis.py' for particular market and timeframe of interest and co
 
 ## Results
 Based on stock's behavioral data mining for 5 months between 2022/1/1 ~ 2022/6/1 for KOSPI and KOSDAQ stocks, an oustanding performance has been achieved between 2022/1/1 ~ 2022/7/1 as shown below.
+
 ![Performance](https://user-images.githubusercontent.com/84615464/177713064-6949e00b-9314-4125-bd09-16cd97c817c7.png)
 
 
