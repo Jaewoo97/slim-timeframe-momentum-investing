@@ -60,12 +60,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][screenshot]](https://example.com)
-![plot](images/overall-scope.png)
-![Screenshot][overall-scope.png]
 ![overall scope](https://user-images.githubusercontent.com/84615464/177702792-554f7105-ff95-4293-8ab5-858768a17999.png)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+This work models and exploits stock's next day performance based on 5 prior days' behavior. The second order derivative is investigated, and a concave behavior is sought, as in the upper figure. Within a small range of next day performance's absolute magnitude, the second order derivative and next day's performance exhibits a linear relationship. ~10 Stocks within the linear range with maximal performance parameters are chosen and covariance-minimized. Such portfolio undergoes a daily update.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
