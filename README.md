@@ -61,8 +61,8 @@
 ## About The Project
 
 ![overall scope](https://user-images.githubusercontent.com/84615464/177702792-554f7105-ff95-4293-8ab5-858768a17999.png)
-
 This work models and exploits stock's next day performance based on 5 prior days' behavior. The second order derivative is investigated, and a concave behavior is sought, as in the upper figure. Within a small range of next day performance's absolute magnitude, the second order derivative and next day's performance exhibits a linear relationship as in the lower figure. ~10 Stocks within the linear range with maximal performance parameters are chosen and covariance-minimized. Such portfolio undergoes a daily update. Please refer to 'Slim timeframe momentum investing paper.pdf' for further details.
+
 ![net deviation](https://user-images.githubusercontent.com/84615464/177710131-9ef41b19-cd24-4c9a-8fce-75d37efe5e75.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
