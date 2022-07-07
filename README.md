@@ -94,7 +94,7 @@ Jaewoo Jeong - jeong207@kaist.ac.kr
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-This project has been initiated during the KAIST-UNIST AI for Finance course in 2022 spring semester.
+This project has been initiated during the KAIST-UNIST AI for Finance course in 2022 spring semester, ranking 1st out of 40 teams with +11.38% for the course's quantitative investment competition which lasted for one month.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
