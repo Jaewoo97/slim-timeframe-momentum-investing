@@ -29,10 +29,16 @@ errSymbs = pd.read_csv('errSymbols.csv')
 cutoffPercentage = 0.01
 numDaysSampling = 5         # Number of days for criterion calculation
 numPerfEval = 3         # Number of days for performance evaluation
-slopeLowThresh = [0.04, 0.05, 0.06]
-slopeHighThresh = [0.0979, 0.08, 0.1]
-devLowThresh = [-0.1092, -0.09, -0.1]
-devHighThresh = [-0.0403, -0.05, -0.06]
+slopeLowThresh = [0.04, 0.04, 0.04, 0.04]
+slopeHighThresh = [0.0979, 0.0979, 0.0979, 0.0979]
+devLowThresh = [-0.1092, -0.1092, -0.1092, -0.1092]
+devHighThresh = [-0.0403, -0.0403, -0.0403, -0.0403]
+criterionMult = [1.0, 1.1, 1.2, 1.3]
+
+# slopeLowThresh = [0.04, 0.05, 0.06]
+# slopeHighThresh = [0.0979, 0.08, 0.1]
+# devLowThresh = [-0.1092, -0.09, -0.1]
+# devHighThresh = [-0.0403, -0.05, -0.04]
 
 # Initialization
 selected_stocks = {}
@@ -42,6 +48,7 @@ portAmountDict = {}
 momentumPerf5days = {str(i): np.zeros([0, numPerfEval]) for i in range(0, len(slopeLowThresh))} # Save performance of momentum portfolio for the next 5 days
 performance = np.zeros([0, 2])      # expected mu, expected stdev, actual next day performance
 df_close = {}
+
 # Initialize selected stocks dictionary
 for dateStartIdx in range(0, len(daysOpen.index) - numDaysSampling - numPerfEval):
     samplingEndDate = daysOpen.index[dateStartIdx + numDaysSampling - 1]
@@ -102,9 +109,11 @@ for sampIdx, sampKey in enumerate(SamplingList):
         mu_stds = np.zeros([len(StockList), 3])     # Stack mu, stdev
         samplingStartDate = daysOpen.index[dateStartIdx]
         samplingEndDate = daysOpen.index[dateStartIdx + numDaysSampling - 1]
+        prevDate = daysOpen.index[dateStartIdx + numDaysSampling - 2]
         perfCalcEndDate = daysOpen.index[dateStartIdx + numDaysSampling + numPerfEval - 1] # Including 5 days for performance calculation
         samplingStartDateStr = datetime.strftime(samplingStartDate, '%Y-%m-%d')
         samplingEndDateStr = datetime.strftime(samplingEndDate, '%Y-%m-%d') # portfolio calculated by buying at this date
+        prevDateStr = datetime.strftime(prevDate, '%Y-%m-%d')
         # print("Day " + str(dateStartIdx+1) + " of " + str(len(daysOpen.index)-numDaysSampling-numPerfEval) + " days")
 
         # Truncate stock's full history
@@ -132,6 +141,8 @@ for sampIdx, sampKey in enumerate(SamplingList):
         # Repeat portfolio by variables
         for portIdx in range(0, len(slopeLowThresh)):
             if np.log(slope) > slopeLowThresh[portIdx] and np.log(slope) < slopeHighThresh[portIdx] and sumNetDev > devLowThresh[portIdx] and sumNetDev < devHighThresh[portIdx]:
+                if dateStartIdx != 0 and StockList[sampKey] in list(selected_stocks[prevDateStr][str(portIdx)].keys()):     # encourage less portfolio switch
+                    criterion = criterion * criterionMult[portIdx]
                 if len(selected_stocks[samplingEndDateStr][str(portIdx)]) < num_minimization:
                     selected_stocks[samplingEndDateStr][str(portIdx)][StockList[sampKey]] = criterion
                     try:
@@ -215,6 +226,17 @@ for dateStartIdx in range(0, len(daysOpen.index)-numDaysSampling-numPerfEval):
         foo = np.array([portAmount['합'].iloc[0]/buyAmount])
         momentumPerf5days[str(portIdx)] = np.vstack([momentumPerf5days[str(portIdx)], np.hstack([foo, np.array([portAmount['합'].iloc[perfIdx]/
                                         portAmount['합'].iloc[perfIdx-1] for perfIdx in range(1, numPerfEval)])])])
+# Analyze portfolio switch ratio
+portSwitchRatio = np.zeros([len(weights.keys())-1, len(slopeLowThresh)])    # ratio of preserved stock
+fooKeys = list(weights.keys())
+for dateIdx in range(0, len(weights.keys())-1):
+    todayDate = fooKeys[dateIdx]
+    nextDate = fooKeys[dateIdx + 1]
+    for portIdx in range(0, len(slopeLowThresh)):
+        for symbKey in list(weights[todayDate][str(portIdx)].keys()):
+            if symbKey in list(weights[nextDate][str(portIdx)].keys()):
+                portSwitchRatio[dateIdx, portIdx] = portSwitchRatio[dateIdx, portIdx] + np.amin([weights[todayDate][str(portIdx)][symbKey][0], weights[nextDate][str(portIdx)][symbKey][0]])
+
 print("Finished overall performance calculation! Starting individual portfolio calculation.")
 duration1day = {str(i): buyAmount for i in range(0, len(slopeLowThresh))}
 duration2day = {str(i): buyAmount for i in range(0, len(slopeLowThresh))}
