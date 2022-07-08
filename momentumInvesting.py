@@ -11,8 +11,6 @@ from datetime import datetime
 import datetime as dt
 from utils import *
 
-## 추가해야 하는 것: 주식별로 처음부터 끝까지 한번에 fetch 후 timeframe 별로 selective 하게 분석
-
 # Parameters
 num_minimization = 10    # number of stocks to iteratively construct the Markowtiz model
 num_stocksToCheck = 0     # number of stocks to randomly check their return. If zero, run all.
@@ -33,7 +31,7 @@ slopeLowThresh = [0.04, 0.04, 0.04, 0.04]
 slopeHighThresh = [0.0979, 0.0979, 0.0979, 0.0979]
 devLowThresh = [-0.1092, -0.1092, -0.1092, -0.1092]
 devHighThresh = [-0.0403, -0.0403, -0.0403, -0.0403]
-criterionMult = [1.0, 1.1, 1.2, 1.3]
+criterionMult = [1.0, 1.5, 2.0, 2.5]
 
 # slopeLowThresh = [0.04, 0.05, 0.06]
 # slopeHighThresh = [0.0979, 0.08, 0.1]
@@ -237,7 +235,7 @@ for dateIdx in range(0, len(weights.keys())-1):
             if symbKey in list(weights[nextDate][str(portIdx)].keys()):
                 portSwitchRatio[dateIdx, portIdx] = portSwitchRatio[dateIdx, portIdx] + np.amin([weights[todayDate][str(portIdx)][symbKey][0], weights[nextDate][str(portIdx)][symbKey][0]])
 
-print("Finished overall performance calculation! Starting individual portfolio calculation.")
+print("Finished overall performance calculation! Post-process performance data..")
 duration1day = {str(i): buyAmount for i in range(0, len(slopeLowThresh))}
 duration2day = {str(i): buyAmount for i in range(0, len(slopeLowThresh))}
 duration3day = {str(i): buyAmount for i in range(0, len(slopeLowThresh))}
@@ -290,3 +288,4 @@ duration1days = pd.DataFrame(duration1days)
 duration2days = pd.DataFrame(duration2days)
 duration3days = pd.DataFrame(duration3days)
 KOSPIdata.to_clipboard()
+print("Finished.")
