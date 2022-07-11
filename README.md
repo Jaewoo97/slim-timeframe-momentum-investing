@@ -54,8 +54,8 @@ Based on stock's behavioral data mining for 5 months between 2022/1/1 ~ 2022/6/1
 
 <!-- ROADMAP -->
 ## Future work
-Initial commit: 22/7/7
-- [ ] Analyze daily portfolio switching amount
+V1.0.1
+- [x] Analyze daily portfolio switching amount
 - [ ] Apply methodology to more timeframes and develop a market-specific mechanism
 - [ ] Analyze more features 
 - [ ] Apply machine learning technique to quantifying correlation
